@@ -12,8 +12,6 @@ app.use(express.json());
 
 const uri = process.env.MONGODB_CONN_STRING;
 
-console.log(uri);
-
 mongoose.connect(uri,{ useNewUrlParser: true});
 
 const connection = mongoose.connection;
@@ -21,9 +19,6 @@ const connection = mongoose.connection;
 connection.once('open', () =>{
     console.log("MongoDB database connection established successfully");
 })
-
-// const db = mongoose.connect(uri);
-// db.once('open', ()=>{console.log("YAAAAAAAAAAAAAAAAAAAA")})
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
