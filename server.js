@@ -11,11 +11,8 @@ app.use(cors());
 app.use(express.json());
 
 const uri = process.env.MONGODB_CONN_STRING;
-
 mongoose.connect(uri,{ useNewUrlParser: true});
-
 const connection = mongoose.connection;
-
 connection.once('open', () =>{
     console.log("MongoDB database connection established successfully");
 })
@@ -24,9 +21,12 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
   })
 
+  const projectRouter = require('./routes/projects')
+  const postRouter = require('./routes/posts')
 
-// setup http server to listen on HTTP_PORT
-//app.listen(HTTP_PORT, onHttpStart);
+  app.use('/projects', projectRouter);
+  app.use('/posts', postRouter);
+
  app.listen(HTTP_PORT, ()=>{
        console.log(`server listening on: ${HTTP_PORT}`);
 });
