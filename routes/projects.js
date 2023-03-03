@@ -1,6 +1,7 @@
 const router = require('express').Router();
 let Project = require('../models/project.model');
 
+
 router.route('/').get((req,res) => {
     Project.find()
     .then(Projects => res.json(Projects).status(200))
